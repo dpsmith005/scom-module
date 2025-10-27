@@ -1,0 +1,138 @@
+Add items from SCOM script repository as needed 
+
+MP comparison
+Connect-SCOMwsProd; $mpWsProd= Get-SCOMManagementPack|sort Sealed,DisplayName|select Sealed,Version,DisplayName,Name,Store
+Connect-SCOMProd; $mpWshProd= Get-SCOMManagementPack|sort Sealed,DisplayName|select Sealed,Version,DisplayName,Name,Store
+$mpwshprod | ?{$mpWsProd.name -contains $_.Name}|ft -AutoSize
+$mpwshprod | ?{$mpWsProd.name -notcontains $_.Name}|ft -AutoSize
+WSHPROD - 219 MP's;  93 found in WSPROD;  126 NOT found in WSPROD
+
+In WSHPROD / NOT in WSPROD
+Sealed Version        DisplayName                                                                        Name                                                        Store
+------ -------        -----------                                                                        ----                                                        -----
+ False 1.0.0.2        DPS Linux Log Rule                                                                 DPS.Linux.Log.Rule                                          WSHPROD
+ False 7.0.42.0       Microsoft SQL Server on Windows RunAs Addendum Management Pack                     Microsoft.SQLServer.Windows.RunAs.Addendum                  WSHPROD
+ False 10.22.10610.18 SCOM Management                                                                    SCOM.Management                                             WSHPROD
+ False 1.0.0.6        SCOM2019 RunAs Helper                                                              SCOM2019.RunAsHelper                                        WSHPROD
+ False 25.1.15.2      WSH ACoE - Data Management                                                         WSH.ACoE.Data.Management                                    WSHPROD
+ False 24.11.7.21     WSH ACoE - Solutions Architecture                                                  WSH.ACoE.Solutions.Architecture                             WSHPROD
+ False 25.4.3.1       WSH Active Directory DS & FS                                                       WSH.Active.Directory.DS.FS                                  WSHPROD
+ False 25.3.5.2       WSH Applications Development                                                       WSH.Applications.Development                                WSHPROD
+ False 24.12.12.2     WSH BIOMED                                                                         WSH.BIOMED                                                  WSHPROD
+ False 25.4.2.2       WSH CommVault Operations Manager                                                   CommVault.Operations.Manager                                WSHPROD
+ False 1.0.0.8        WSH Company Knowledge                                                              WSH.Company.Knowledge                                       WSHPROD
+ False 25.4.2.1       WSH Domain Controller                                                              WSH.Domain.Controller                                       WSHPROD
+ False 24.12.18.18    WSH EA - Admin/Financial                                                           WSH.FINAPP.MP                                               WSHPROD
+ False 25.3.7.14      WSH EA - Ancillary Applications                                                    WSH.EA.Ancillary.Applications                               WSHPROD
+ False 25.3.7.2       WSH EA - Archiving Applications                                                    WSH.EA.Archiving.Applications                               WSHPROD
+ False 25.3.4.2       WSH EA - BusinessApplications                                                      Wellspan.Health.EA.BusinessApplications                     WSHPROD
+ False 25.2.25.2      WSH EA - ServiceNow                                                                WSH.EA.ServiceNow                                           WSHPROD
+ False 25.1.2.7       WSH EA Imaging Applications                                                        WSH.EA.Imaging.Applications                                 WSHPROD
+ False 25.3.4.2       WSH Enterprise Integration - Administrative/Financial                              WSH.Enterprise.Integration.AdministrativeFinancial          WSHPROD
+ False 25.3.5.7       WSH Enterprise Integration - Clinical DevOps                                       WSH.EI.MP                                                   WSHPROD
+ False 25.1.28.1      WSH Epic Cogito                                                                    Wellspan.Health.EpicCogito                                  WSHPROD
+ False 25.1.28.3      WSH Epic ECSA                                                                      WSH.Epic.ECSA                                               WSHPROD
+ False 25.1.28.5      WSH EPIC ODBA MP                                                                   WSH.EPIC.ODBA.MP                                            WSHPROD
+ False 1.0.0.0        WSH Evan                                                                           WSH.Evan                                                    WSHPROD
+ False 25.4.2.1       WSH HPE 3PAR                                                                       WSH.HPE.PAR                                                 WSHPROD
+ False 25.1.29.1      WSH InfoSec - Cyber Engineering MP                                                 WSH.WELLSOC.MP                                              WSHPROD
+ False 25.1.2.4       WSH IT Operations                                                                  WSH.Operations                                              WSHPROD
+ False 25.5.1.0       WSH IWAT                                                                           WSH.IWAT                                                    WSHPROD
+ False 25.1.28.5      WSH Linux RedHat                                                                   WSH.Linux.RedHat                                            WSHPROD
+ False 25.4.4.1       WSH Meditech                                                                       WSH.Meditech                                                WSHPROD
+ False 25.1.20.3      WSH Microsoft SQLServer overrides                                                  Microsoft.SQLServer.Overrides                               WSHPROD
+ False 25.4.2.1       WSH Netapp Overrides                                                               WSH.Netapp                                                  WSHPROD
+ False 25.1.20.14     WSH Network MP                                                                     WSH.NETWORK.MP                                              WSHPROD
+ False 25.1.29.3      WSH Operations Manager Health                                                      WSH.OperationsManager.Health                                WSHPROD
+ False 25.4.2.1       WSH OR HPE Storage                                                                 WSH.OR.HPE.Storage                                          WSHPROD
+ False 25.4.2.1       WSH OR IBM Storage                                                                 WSH.OR.IBM.Storage                                          WSHPROD
+ False 25.4.3.1       WSH OR Windows 2012                                                                WSH.OR.Windows2012                                          WSHPROD
+ False 25.4.3.1       WSH OR Windows Cluster                                                             WSH.OR.Windows.Cluster                                      WSHPROD
+ False 24.11.14.5     WSH Population Health IS                                                           WSH.Population.Health.IS                                    WSHPROD
+ False 20.10.20.11    WSH SCOM Agent Initiated Maintenance Mode                                          Demo.SCOM.AgentMaintenanceMode                              WSHPROD
+ False 25.1.20.1      WSH Telecommunications                                                             WSH.Telecommunications                                      WSHPROD
+ False 25.1.20.1      WSH TS - Client Development                                                        WSH.Desktop                                                 WSHPROD
+ False 25.1.16.6      WSH WI - DXP Development                                                           WSH.WI.DXP.Development                                      WSHPROD
+ False 25.4.3.13      WSH Windows Server                                                                 WSH.Windows.Server                                          WSHPROD
+  True 10.22.10610.0                                                                                     Microsoft.SystemCenter.DBUpdateTask                         WSHPROD
+  True 10.22.10118.0                                                                                     Microsoft.SystemCenter.Reports.Deployment                   WSHPROD
+  True 10.19.10649.0                                                                                     Microsoft.SystemCenter.OperationsManager.Telemetry          WSHPROD
+  True 10.0.2.2       Active Directory Domain Services Common Class Library                              Microsoft.Windows.Server.AD.Class.Library                   WSHPROD
+  True 10.0.2.2       Active Directory Domain Services for Microsoft Windows Server 2012 R2 (Discovery)  Microsoft.Windows.Server.AD.2012.R2.Discovery               WSHPROD
+  True 10.0.2.2       Active Directory Domain Services for Microsoft Windows Server 2012 R2 (Monitoring) Microsoft.Windows.Server.AD.2012.R2.Monitoring              WSHPROD
+  True 10.0.2.2       Active Directory Domain Services for Microsoft Windows Server 2016 (Discovery)     Microsoft.Windows.Server.AD.2016.Discovery                  WSHPROD
+  True 10.0.2.2       Active Directory Domain Services for Microsoft Windows Server 2016 (Monitoring)    Microsoft.Windows.Server.AD.2016.Monitoring                 WSHPROD
+  True 6.0.8321.0     Active Directory Server Common Library                                             Microsoft.Windows.Server.AD.Library                         WSHPROD
+  True 10.0.2.2       Active Directory Server Domain Member (Monitoring)                                 Microsoft.Windows.Server.AD.DomainMemberMonitoring          WSHPROD
+  True 10.19.1123.0   AIX 7 Operating System                                                             Microsoft.AIX.7                                             WSHPROD
+  True 10.19.1123.0   AIX Operating System Library                                                       Microsoft.AIX.Library                                       WSHPROD
+  True 1.2.8.69       Data on Demand - Community Management Pack                                         Community.DataOnDemand                                      WSHPROD
+  True 1.2.8.69       Data on Demand IIS - Community Management Pack                                     Community.DataOnDemand.IIS                                  WSHPROD
+  True 1.2.8.69       Data on Demand SQL 2017 - Community Management Pack                                Community.DataOnDemand.SQL.2017                             WSHPROD
+  True 5.4.0.0        HPE Primera and 3PAR Storage Management Pack for System Center                     HPEnterpriseStorage3PARStoreServMP                          WSHPROD
+  True 5.4.0.0        HPE Storage Alert Summary Dashboard Widget                                         AlertSummaryPack                                            WSHPROD
+  True 5.4.0.0        HPE Storage Alert Summary HTML Dashboard Widget                                    AlertSummaryHTMLDashboard                                   WSHPROD
+  True 5.4.0.0        HPE Storage Alerts Dashboard Management Pack for System Center                     HPEStorageAlertsDashboardMP                                 WSHPROD
+  True 5.4.0.0        HPE Storage Capacity Dashboard Management Pack for System Center                   HPEStorageCapacityDashboardMP                               WSHPROD
+  True 5.1.0.0        HPE Storage Capacity Dashboard Management Pack for System Center                   HPStorageCapacityDashboardMP                                WSHPROD
+  True 5.4.0.0        HPE Storage Capacity Summary Dashboard Widget                                      CapacityDashboardMP                                         WSHPROD
+  True 5.4.0.0        HPE Storage Capacity Summary HTML Dashboard Widget                                 CapacityHTMLDashboardMP                                     WSHPROD
+  True 5.4.0.0        HPE Storage Configuration Management Pack for System Center                        HPEStorageConfiguratorDashboard                             WSHPROD
+  True 5.4.0.0        HPE Storage Health Dashboard Management Pack for System Center                     HPEStorageHealthDashboardMP                                 WSHPROD
+  True 5.4.0.0        HPE Storage Health Summary Dashboard Widget                                        HPEStorageHealthDashboardMPX                                WSHPROD
+  True 5.1.0.0        HPE Storage Health Summary Dashboard Widget                                        HPStorageHealthDashboardMP                                  WSHPROD
+  True 5.4.0.0        HPE Storage Health Summary HTML Dashboard Widget                                   HealthHTML                                                  WSHPROD
+  True 5.4.0.0        HPE Storage Library Management Pack for System Center                              HPEnterpriseStorageLibraryMP                                WSHPROD
+  True 5.1.0.0        HPE Storage Performance Dashboard Management Pack for System Center                HPStoragePerformanceDashboardMP                             WSHPROD
+  True 5.4.0.0        HPE Storage Performance Dashboard Management Pack for System Center                HPEStoragePerformanceDashboardMP                            WSHPROD
+  True 5.4.0.0        HPE Storage Performance Summary Dashboard Widget                                   PerformanceDashboardMP                                      WSHPROD
+  True 5.4.0.0        HPE Storage Performance Summary HTML Dashboard Widget                              PerformanceHTMLDashboard                                    WSHPROD
+  True 5.4.0.0        HPE StoreOnce Backup Management Pack for System Center                             HPEnterpriseStorageStoreOnceMP                              WSHPROD
+  True 2.7.0.0        IBM Storage: Spectrum Virtualize Family                                            IBM.Storage.Spectrum.Virtualize.Family                      WSHPROD
+  True 2.7.0.0        IBM System Storage                                                                 IBM.Storage.Common                                          WSHPROD
+  True 10.22.1175.0   Linux Log File Monitoring                                                          Microsoft.Linux.Log.Monitoring                              WSHPROD
+  True 10.22.1175.0   Linux Operating System Library                                                     Microsoft.Linux.Library                                     WSHPROD
+  True 10.19.10307.0  Management Pack Recommendations                                                    Microsoft.SystemCenter.ManagementPack.Recommendations       WSHPROD
+  True 10.22.10610.0  Microsoft ODR Report Library                                                       ODR                                                         WSHPROD
+  True 7.0.32.0       Microsoft SQL Server Core Library                                                  Microsoft.SQLServer.Core.Library                            WSHPROD
+  True 7.0.32.0       Microsoft SQL Server Core Library (Views)                                          Microsoft.SQLServer.Core.Views                              WSHPROD
+  True 7.0.32.0       Microsoft SQL Server on Windows (Discovery)                                        Microsoft.SQLServer.Windows.Discovery                       WSHPROD
+  True 7.0.32.0       Microsoft SQL Server on Windows (Monitoring)                                       Microsoft.SQLServer.Windows.Monitoring                      WSHPROD
+  True 7.0.32.0       Microsoft SQL Server on Windows (Views)                                            Microsoft.SQLServer.Windows.Views                           WSHPROD
+  True 7.0.32.0       Microsoft SQL Server Visualization Library                                         Microsoft.SQLServer.Visualization.Library                   WSHPROD
+  True 7.0.24.0       Microsoft SQL Server Web Dashboards                                                Microsoft.SQLServer.Core.WebDashboards                      WSHPROD
+  True 7.0.10249.1    Microsoft Windows Server 2012 Internet Information Services 8                      Microsoft.Windows.InternetInformationServices.2012          WSHPROD
+  True 10.1.0.1       Microsoft Windows Server 2016 and 1709+ Internet Information Services 10           Microsoft.Windows.InternetInformationServices.2016          WSHPROD
+  True 10.22.10118.0  Network Management Reports                                                         System.NetworkManagement.Reports                            WSHPROD
+  True 1.0.0.313      Network Windows Computer NetstatWatcher                                            Network.Windows.Computer.NetstatWatcher                     WSHPROD
+  True 1.1.1.2        PowerShell Monitoring - Community Management Pack                                  Community.PowerShellMonitoring                              WSHPROD
+  True 10.19.1254.0   Red Hat Enterprise Linux Server 6 Operating System                                 Microsoft.Linux.RHEL.6                                      WSHPROD
+  True 10.22.1175.0   Red Hat Enterprise Linux Server 7 Operating System                                 Microsoft.Linux.RHEL.7                                      WSHPROD
+  True 10.22.1175.0   Red Hat Operating System Library                                                   Microsoft.Linux.RedHat.Library                              WSHPROD
+  True 11.2.1.0       Silect Windows Library                                                             Silect.Windows.Library                                      WSHPROD
+  True 6.4.0.0        SQL Server 2005 (Discovery)                                                        Microsoft.SQLServer.2005.Discovery                          WSHPROD
+  True 6.4.0.0        SQL Server 2008 (Discovery)                                                        Microsoft.SQLServer.2008.Discovery                          WSHPROD
+  True 6.4.0.0        SQL Server Core Library                                                            Microsoft.SQLServer.Library                                 WSHPROD
+  True 10.22.10610.0  System Center Core Monitoring Reports                                              Microsoft.SystemCenter.OperationsManager.Reports.2007       WSHPROD
+  True 3.0.1.5        System Center Operations Manager Health Check reports                              SystemCenter.Operations.Manager.Health.Check.Report.Library WSHPROD
+  True 10.22.1175.0   Universal Linux (Debian) Discovery                                                 Microsoft.Linux.UniversalD.1                                WSHPROD
+  True 10.22.1175.0   Universal Linux (RPM) Discovery                                                    Microsoft.Linux.UniversalR.1                                WSHPROD
+  True 10.22.1175.0   Universal Linux Monitoring                                                         Microsoft.Linux.Universal.Monitoring                        WSHPROD
+  True 10.22.1175.0   Universal Linux Operating System Library                                           Microsoft.Linux.Universal.Library                           WSHPROD
+  True 1.0.0.72       UNIX/Linux Container Monitoring                                                    Docker.Unix.Monitoring                                      WSHPROD
+  True 10.22.1175.0   UNIX/Linux Service Template Library                                                Microsoft.Unix.Service.Library                              WSHPROD
+  True 6.0.7026.0     Windows Server 2008 Operating System (Discovery)                                   Microsoft.Windows.Server.2008.Discovery                     WSHPROD
+  True 6.0.7326.0     Windows Server 2012 Operating System (Discovery)                                   Microsoft.Windows.Server.2012.Discovery                     WSHPROD
+  True 6.0.7326.0     Windows Server 2012 Operating System (Monitoring)                                  Microsoft.Windows.Server.2012.Monitoring                    WSHPROD
+  True 6.0.7326.0     Windows Server 2012 R2 Operating System (Discovery)                                Microsoft.Windows.Server.2012.R2.Discovery                  WSHPROD
+  True 6.0.7326.0     Windows Server 2012 R2 Operating System (Monitoring)                               Microsoft.Windows.Server.2012.R2.Monitoring                 WSHPROD
+  True 10.1.0.5       Windows Server 2016 and above Operating Systems (Discovery)                        Microsoft.Windows.Server.2016.Discovery                     WSHPROD
+  True 10.1.0.5       Windows Server 2016 and above Operating Systems (Monitoring)                       Microsoft.Windows.Server.2016.Monitoring                    WSHPROD
+  True 10.1.0.5       Windows Server 2016 and above Process and Port Monitoring                          Microsoft.Windows.Server.2016.ProcessPortMonitoring         WSHPROD
+  True 10.1.0.5       Windows Server Cluster Disks Monitoring                                            Microsoft.Windows.Server.ClusterSharedVolumeMonitoring      WSHPROD
+  True 10.1.0.5       Windows Server Html5 Dashboard                                                     Microsoft.Windows.Server.Html5.Dashboard                    WSHPROD
+  True 10.1.0.1       Windows Server Internet Information Services Library                               Microsoft.Windows.InternetInformationServices.CommonLibrary WSHPROD
+  True 10.1.0.5       Windows Server Operating System Reports                                            Microsoft.Windows.Server.Reports                            WSHPROD
+  True 1.0.0.144      Windows.Computer.Netapp                                                            Windows.Computer.Netapp                                     WSHPROD
+  True 24.11.14.38    WSH Custom Alerts                                                                  WSH.CustomAlerts.MP                                         WSHPROD
+  True 25.4.3.4       WSH Registry                                                                       WSH.Registry.Extended                                       WSHPROD
