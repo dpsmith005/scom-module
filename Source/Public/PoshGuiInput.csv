@@ -1,0 +1,8 @@
+Label,Type,Width,Items
+First Name,string,200,
+Last Name,string,150,
+email Address,string,250,
+integer,int,30,
+decimal,dec,50,
+CheckBox Test,checkbox,100,
+Combo,combobox,100,item1:item2:item3:item4
